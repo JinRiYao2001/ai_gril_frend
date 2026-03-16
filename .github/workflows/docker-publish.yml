@@ -26,6 +26,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: .dockers/Dockerfile.qwen3-vl-moe
+          file: dockers/Dockerfile.qwen3-vl-moe
           push: true
           tags: ghcr.io/${{ env.REPO_LOWER }}:latest
