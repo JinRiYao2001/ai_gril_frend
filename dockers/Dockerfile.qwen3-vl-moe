@@ -1,0 +1,25 @@
+FROM vllm/vllm-openai:latest
+
+LABEL maintainer="ryj"
+LABEL model="Qwen3-VL-30B-A3B-Instruct-abliterated"
+
+# 避免 torch 碎片化显存
+ENV PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True"
+
+# ---------- 系统依赖 & debug 工具 ----------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    wget \
+    vim \
+    htop \
+    nvtop \
+    net-tools \
+    iputils-ping \
+    jq \
+    screen \
+    && rm -rf /var/lib/apt/lists/*
+
+# ---------- Qwen3-VL 额外 Python 依赖 ----------
+# qwen-vl-utils: Qwen-VL 系列的图像/视频预处理
+# torchvision: VL 模型视觉 backbone 需要
+RUN pip install --no-cache-dir qwen-vl-utils
