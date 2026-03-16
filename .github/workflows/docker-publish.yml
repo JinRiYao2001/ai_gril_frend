@@ -19,11 +19,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-              uses: docker/build-push-action@v5
-              with:
-                # context 指定构建上下文，通常是项目根目录 "."
-                context: .
-                # file 指定相对于 context 的 Dockerfile 路径
-                file: .dockers/Dockerfile.qwen3-vl-moe
-                push: true
-                tags: ghcr.io/${{ github.repository }}:latest
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: .dockers/Dockerfile.qwen3-vl-moe
+          push: true
+          tags: ghcr.io/${{ github.repository }}:latest
