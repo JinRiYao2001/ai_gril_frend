@@ -1,0 +1,29 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+              uses: docker/build-push-action@v5
+              with:
+                # context 指定构建上下文，通常是项目根目录 "."
+                context: .
+                # file 指定相对于 context 的 Dockerfile 路径
+                file: .dockers/Dockerfile.qwen3-vl-moe
+                push: true
+                tags: ghcr.io/${{ github.repository }}:latest
