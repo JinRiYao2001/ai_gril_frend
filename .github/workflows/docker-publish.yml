@@ -11,6 +11,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Lowercase repository name
+        run: |
+          echo "REPO_LOWER=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
+
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
@@ -24,4 +28,4 @@ jobs:
           context: .
           file: .dockers/Dockerfile.qwen3-vl-moe
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${{ env.REPO_LOWER }}:latest
