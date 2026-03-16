@@ -24,4 +24,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # torchvision: VL 模型视觉 backbone 需要
 RUN pip install --no-cache-dir qwen-vl-utils
 
+ENTRYPOINT []
 CMD ["sleep", "infinity"]
