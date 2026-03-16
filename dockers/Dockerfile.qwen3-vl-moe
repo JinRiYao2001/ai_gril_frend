@@ -23,3 +23,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # qwen-vl-utils: Qwen-VL 系列的图像/视频预处理
 # torchvision: VL 模型视觉 backbone 需要
 RUN pip install --no-cache-dir qwen-vl-utils
+
+CMD ["sleep", "infinity"]
